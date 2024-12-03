@@ -20,21 +20,25 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITran
 
     public override async Task ProcessAsync(Transferred logEvent, LogEventContext context)
     {
-        var transfer = new TransferRecord
+        if (!IsNftTransfer(logEvent))
+        {
+            return;
+        }
+
+        var nftTransfer = new TransferRecord
         {
             Id = $"{context.ChainId}-{context.Transaction.TransactionId}-{context.LogEvent.Index}",
-            FromAddress = logEvent.From.ToBase58(),
             ToAddress = logEvent.To.ToBase58(),
             Symbol = logEvent.Symbol,
-            Amount = logEvent.Amount
+            Amount = logEvent.Amount,
+            Memo = logEvent.Memo
         };
-        await SaveEntityAsync(transfer);
-        
-        await ChangeBalanceAsync(context.ChainId, logEvent.From.ToBase58(), logEvent.Symbol, -logEvent.Amount);
-        await ChangeBalanceAsync(context.ChainId, logEvent.To.ToBase58(), logEvent.Symbol, logEvent.Amount);
+        await SaveEntityAsync(nftTransfer);
+
+        await ChangeNFTBalanceAsync(context.ChainId, logEvent.To.ToBase58(), logEvent.Symbol, logEvent.Amount);
     }
 
-    private async Task ChangeBalanceAsync(string chainId, string address, string symbol, long amount)
+    private async Task ChangeNFTBalanceAsync(string chainId, string address, string symbol, long amount)
     {
         var accountId = $"{chainId}-{address}-{symbol}";
         var account = await GetEntityAsync<Account>(accountId);
@@ -53,8 +57,39 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITran
             account.Amount += amount;
         }
 
-        Logger.LogDebug("Balance changed: {0} {1} {2}", account.Address, account.Symbol, account.Amount);
-        
+        Logger.LogDebug("NFT Balance changed: {0} {1} {2}", account.Address, account.Symbol, account.Amount);
+
         await SaveEntityAsync(account);
     }
+
+    private bool IsNftTransfer(Transferred logEvent)
+{
+    // Ensure Symbol follows the NFT pattern and is not empty
+    if (string.IsNullOrEmpty(logEvent.Symbol) || !logEvent.Symbol.Contains("-"))
+    {
+        return false;
+    }
+
+    // Ensure Amount is greater than zero
+    if (logEvent.Amount <= 0)
+    {
+        return false;
+    }
+
+    // Ensure Memo is present and not empty
+    if (string.IsNullOrEmpty(logEvent.Memo))
+    {
+        return false;
+    }
+
+    // Ensure To address is valid
+    if (logEvent.To == null || string.IsNullOrEmpty(logEvent.To.ToBase58()))
+    {
+        return false;
+    }
+
+    // If all checks pass, this is an NFT transfer
+    return true;
+}
+
 }
