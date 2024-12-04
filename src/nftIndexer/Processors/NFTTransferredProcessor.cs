@@ -22,6 +22,7 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITran
     {
         if (!IsNftTransfer(logEvent))
         {
+            Logger.LogDebug("Not a NFT Transfer!!!");
             return;
         }
 
@@ -64,31 +65,26 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITran
 
     private bool IsNftTransfer(Transferred logEvent)
 {
-    // Ensure Symbol follows the NFT pattern and is not empty
+    Logger.LogDebug("Processing log with symbol: {0}", logEvent.Symbol);
     if (string.IsNullOrEmpty(logEvent.Symbol) || !logEvent.Symbol.Contains("-"))
     {
         return false;
     }
 
-    // Ensure Amount is greater than zero
     if (logEvent.Amount <= 0)
     {
         return false;
     }
 
-    // Ensure Memo is present and not empty
     if (string.IsNullOrEmpty(logEvent.Memo))
     {
         return false;
     }
 
-    // Ensure To address is valid
     if (logEvent.To == null || string.IsNullOrEmpty(logEvent.To.ToBase58()))
     {
         return false;
     }
-
-    // If all checks pass, this is an NFT transfer
     return true;
 }
 

@@ -23,7 +23,7 @@ public class Query
 
         if (!input.Symbol.IsNullOrWhiteSpace())
         {
-            queryable = queryable.Where(a => a.Symbol == input.Symbol);
+            queryable = queryable.Where(a => a.Symbol == input.Symbol && a.Symbol.Contains("-"));
         }
 
         var accounts = queryable.OrderBy(o => o.Metadata.Block.BlockHeight).ToList();
@@ -45,10 +45,14 @@ public class Query
             queryable = queryable.Where(a => a.ToAddress == input.Address);
         }
 
+        // Filter by Symbol, ensuring it matches the NFT pattern
         if (!input.Symbol.IsNullOrWhiteSpace())
         {
-            queryable = queryable.Where(a => a.Symbol == input.Symbol);
+            queryable = queryable.Where(a => a.Symbol == input.Symbol && a.Symbol.Contains("-"));
         }
+
+        // Ensure NFT-specific conditions
+        queryable = queryable.Where(a => a.Symbol.Contains("-") && !string.IsNullOrEmpty(a.Memo) && a.Amount > 0);
 
         var transferRecords = queryable.OrderBy(o => o.Metadata.Block.BlockHeight).ToList();
 
