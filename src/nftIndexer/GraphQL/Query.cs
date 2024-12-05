@@ -52,7 +52,7 @@ public class Query
         }
 
         // Ensure NFT-specific conditions
-        queryable = queryable.Where(a => a.Symbol.Contains("-") && !string.IsNullOrEmpty(a.Memo) && a.Amount > 0);
+        queryable = queryable.Where(a => a.Symbol.Contains("-") && a.Amount > 0);
 
         var transferRecords = queryable.OrderBy(o => o.Metadata.Block.BlockHeight).ToList();
 

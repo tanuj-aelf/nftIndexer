@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("nftIndexer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d24f7873aebde290c4ec72b09e999e2d232783c2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38456ed689674f198b89006fdd5713762cc912d9")]
 [assembly: System.Reflection.AssemblyProductAttribute("nftIndexer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("nftIndexer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
