@@ -6,7 +6,7 @@ using Volo.Abp.DependencyInjection;
 
 namespace nftIndexer.Processors;
 
-public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITransientDependency
+public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransientDependency
 {
     public override string GetContractAddress(string chainId)
     {
@@ -18,7 +18,7 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITran
         };
     }
 
-    public override async Task ProcessAsync(Transferred logEvent, LogEventContext context)
+    public override async Task ProcessAsync(Issued logEvent, LogEventContext context)
     {
         if (!IsNftTransfer(logEvent))
         {
@@ -63,7 +63,7 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Transferred>, ITran
         await SaveEntityAsync(account);
     }
 
-    private bool IsNftTransfer(Transferred logEvent)
+    private bool IsNftTransfer(Issued logEvent)
 {
     Logger.LogDebug("Processing log with symbol: {0}", logEvent.Symbol);
     if (string.IsNullOrEmpty(logEvent.Symbol) || !logEvent.Symbol.Contains("-"))
