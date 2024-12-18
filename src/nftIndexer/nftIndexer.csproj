@@ -7,7 +7,6 @@
 
     <ItemGroup>
       <PackageReference Include="AeFinder.Sdk" Version="1.4.0" />
-      <PackageReference Include="AElf.Client" Version="1.10.0" />
     </ItemGroup>
 
 

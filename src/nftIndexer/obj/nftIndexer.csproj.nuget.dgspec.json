@@ -46,10 +46,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "AElf.Client": {
-              "target": "Package",
-              "version": "[1.10.0, )"
-            },
             "AeFinder.Sdk": {
               "target": "Package",
               "version": "[1.4.0, )"
