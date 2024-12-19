@@ -175,10 +175,10 @@
           "System.Net.Http.Json": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/AElf.Client.Protobuf.dll": {}
+          "lib/net6.0/_._": {}
         },
         "runtime": {
-          "lib/net6.0/AElf.Client.Protobuf.dll": {}
+          "lib/net6.0/_._": {}
         }
       },
       "AElf.Cryptography/1.6.0": {
@@ -19246,8 +19246,11 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AElf.Client.Protobuf >= 1.2.1",
+      "AElf.Types >= 1.6.0",
       "AeFinder.App.TestBase >= 1.4.0",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
+      "Moq >= 4.20.70",
       "Shouldly >= 4.2.1",
       "coverlet.collector >= 6.0.2",
       "nftIndexer >= 1.0.0",
@@ -19305,13 +19308,28 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AElf.Client.Protobuf": {
+            "include": "None",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[1.2.1, )"
+          },
+          "AElf.Types": {
+            "target": "Package",
+            "version": "[1.6.0, )"
+          },
           "AeFinder.App.TestBase": {
+            "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
             "target": "Package",
             "version": "[1.4.0, )"
           },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[17.8.0, )"
+          },
+          "Moq": {
+            "target": "Package",
+            "version": "[4.20.70, )"
           },
           "Shouldly": {
             "target": "Package",

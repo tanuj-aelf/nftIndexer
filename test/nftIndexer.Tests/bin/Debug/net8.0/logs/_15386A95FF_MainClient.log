@@ -1,0 +1,39 @@
+﻿[2024-12-19 13:02:33.048 GMT 13	Information	100314	Orleans.OutsideRuntimeClient]	Starting Orleans client with runtime version "8.1.0. Commit Hash: deda4baa2892174d0ca2c9fb470f0082ec33a679+deda4baa2892174d0ca2c9fb470f0082ec33a679 (Release).", local address C192.168.1.5:0:-93618152 and client id sys.client/c2472671f73d484c8e50551a8e2b104f	
+[2024-12-19 13:02:33.057 GMT 10	Information	101309	Orleans.Messaging.GatewayManager]	Found 2 gateways: [gwy.tcp://127.0.0.1:47690/0, gwy.tcp://127.0.0.1:47691/0]	
+[2024-12-19 13:02:33.063 GMT 16	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Establishing connection to endpoint S127.0.0.1:47690:0	
+[2024-12-19 13:02:33.063 GMT 20	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Establishing connection to endpoint S127.0.0.1:47691:0	
+[2024-12-19 13:02:33.064 GMT 13	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Connected to endpoint S127.0.0.1:47691:0	
+[2024-12-19 13:02:33.064 GMT 17	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Connected to endpoint S127.0.0.1:47690:0	
+[2024-12-19 13:02:33.071 GMT 19	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Established connection to S127.0.0.1:26151:93618152 with protocol version Version1	
+[2024-12-19 13:02:33.071 GMT 13	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Established connection to S127.0.0.1:26150:93618151 with protocol version Version1	
+[2024-12-19 13:02:33.071 GMT 19	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Connection [Local: 127.0.0.1:24397, Remote: 127.0.0.1:47691, ConnectionId: 0HN905LJB5LCM] established with S127.0.0.1:47691:0	
+[2024-12-19 13:02:33.071 GMT 13	Information	0	Orleans.Runtime.Messaging.NetworkingTrace]	Connection [Local: 127.0.0.1:24397, Remote: 127.0.0.1:47690, ConnectionId: 0HN905LJB5LCN] established with S127.0.0.1:47690:0	
+[2024-12-19 13:02:33.127 GMT 16	Information	100929	Orleans.OutsideRuntimeClient]	Started client with address [GrainAddress GrainId sys.client/c2472671f73d484c8e50551a8e2b104f, ActivationId: @0b6c9d3325e9452aa8043152841911db, SiloAddress: C192.168.1.5:0:-93618152] and id sys.client/c2472671f73d484c8e50551a8e2b104f	
+[2024-12-19 13:02:33.129 GMT 16	Information	0	Orleans.ClientOptionsLogger]	Configuration Orleans.Configuration.ClientMessagingOptions: 
+ClientSenderBuckets: 8192
+PreferredFamily: InterNetwork
+NetworkInterfaceName: 
+LocalAddress: 
+ResponseTimeout: 00:00:30
+ResponseTimeoutWithDebugger: 00:30:00
+DropExpiredMessages: True
+MaxMessageHeaderSize: 10485760
+MaxMessageBodySize: 104857600
+	
+[2024-12-19 13:02:33.129 GMT 16	Information	0	Orleans.ClientOptionsLogger]	Configuration Orleans.Configuration.ClusterOptions: 
+ClusterId: testcluster-2024-12-19t13-02-31-704
+ServiceId: 6a936e163df64662bdb9ae39b2717cc9
+	
+[2024-12-19 13:02:33.130 GMT 16	Information	0	Orleans.ClientOptionsLogger]	Configuration Orleans.Configuration.ConnectionOptions: 
+ProtocolVersion: Version1
+ConnectionsPerEndpoint: 1
+ConnectionRetryDelay: 00:00:01
+OpenConnectionTimeout: 00:00:05
+	
+[2024-12-19 13:02:33.130 GMT 16	Information	0	Orleans.ClientOptionsLogger]	Configuration Orleans.Configuration.StaticGatewayListProviderOptions: 
+Gateways.0: gwy.tcp://127.0.0.1:47690/0
+Gateways.1: gwy.tcp://127.0.0.1:47691/0
+	
+[2024-12-19 13:02:33.131 GMT 16	Information	0	Microsoft.Hosting.Lifetime]	Application started. Press Ctrl+C to shut down.	
+[2024-12-19 13:02:33.131 GMT 16	Information	0	Microsoft.Hosting.Lifetime]	Hosting environment: Development	
+[2024-12-19 13:02:33.131 GMT 16	Information	0	Microsoft.Hosting.Lifetime]	Content root path: C:\Users\tanuj\OneDrive\Desktop\Aelf Projects\NFT-indexer\nftIndexer\test\nftIndexer.Tests\bin\Debug\net8.0\	

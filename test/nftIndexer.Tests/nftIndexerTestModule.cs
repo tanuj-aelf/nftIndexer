@@ -1,6 +1,14 @@
 using AeFinder.App.TestBase;
+using AeFinder.Sdk.Processor;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
+using nftIndexer.Processors;
+using AeFinder.Sdk;
+using Moq;
+using nftIndexer.Entities;
+using AeFinder.App.BlockChain;
+using Microsoft.Extensions.Options;
+using System.Collections.Generic;
 
 namespace nftIndexer;
 
@@ -13,7 +21,19 @@ public class nftIndexerTestModule : AbpModule
     {
         Configure<AeFinderAppEntityOptions>(options => { options.AddTypes<nftIndexerModule>(); });
         
-        // Add your Processors.
-        // context.Services.AddSingleton<MyLogEventProcessor>();
+        context.Services.AddTransient<NFTTransferredProcessor>();
+        
+        // Mock the repository
+        var mockRepository = new Mock<IRepository<Account>>();
+        context.Services.AddSingleton(mockRepository.Object);
+
+        // Configure blockchain nodes
+        Configure<ChainNodeOptions>(options =>
+        {
+            options.ChainNodes = new Dictionary<string, string>
+            {
+                { "tDVW", "http://tdvw-test-node.aelf.io" }
+            };
+        });
     }
 }
