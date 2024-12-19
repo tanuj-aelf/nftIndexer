@@ -1,6 +1,7 @@
 using AElf.Contracts.MultiToken;
 using AeFinder.Sdk.Logging;
 using AeFinder.Sdk.Processor;
+using AeFinder.Sdk;
 using nftIndexer.Entities;
 using Volo.Abp.DependencyInjection;
 
@@ -8,6 +9,13 @@ namespace nftIndexer.Processors;
 
 public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransientDependency
 {
+    private readonly IBlockChainService _blockChainService;
+
+    public NFTTransferredProcessor(IBlockChainService blockChainService)
+    {
+        _blockChainService = blockChainService;
+    }
+
     public override string GetContractAddress(string chainId)
     {
         return chainId switch
@@ -24,6 +32,11 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransient
         {
             return;
         }
+
+        var tokenInfoParam = new GetTokenInfoInput
+        {
+            Symbol = logEvent.Symbol
+        };
 
         var nftTransfer = new TransferRecord
         {
@@ -42,6 +55,19 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransient
     {
         var accountId = $"{chainId}-{address}-{symbol}";
         var account = await GetEntityAsync<Account>(accountId);
+        var tokenInfoParam = new GetTokenInfoInput
+        {
+            Symbol = symbol
+        };
+        Logger.LogDebug("Fetching TokenInfo: ChainId={0}, Address={1}, Symbol={2}", chainId, GetContractAddress(chainId), symbol);
+        var contractAddress = GetContractAddress(chainId);
+        Logger.LogDebug("Contract Address resolved to: {0}", contractAddress);
+        var tokenInfo = await _blockChainService.ViewContractAsync<TokenInfo>(
+            chainId, contractAddress,
+            "GetTokenInfo", tokenInfoParam);
+
+        Logger.LogDebug("TokenInfo response: {@TokenInfo}", tokenInfo);
+
         if (account == null)
         {
             account = new Account
@@ -49,7 +75,9 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransient
                 Id = accountId,
                 Symbol = symbol,
                 Amount = amount,
-                Address = address
+                Address = address,
+                TokenName = tokenInfo.TokenName,
+                ExternalInfo = tokenInfo.ExternalInfo
             };
         }
         else
@@ -57,7 +85,7 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransient
             account.Amount += amount;
         }
 
-        Logger.LogDebug("NFT Balance changed: {0} {1} {2}", account.Address, account.Symbol, account.Amount);
+        Logger.LogDebug("NFT Balance changed: {0} {1} {2} {3}", account.Address, account.Symbol, account.Amount, account.TokenName);
 
         await SaveEntityAsync(account);
     }
