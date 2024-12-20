@@ -59,9 +59,7 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransient
         {
             Symbol = symbol
         };
-        Logger.LogDebug("Fetching TokenInfo: ChainId={0}, Address={1}, Symbol={2}", chainId, GetContractAddress(chainId), symbol);
         var contractAddress = GetContractAddress(chainId);
-        Logger.LogDebug("Contract Address resolved to: {0}", contractAddress);
         var tokenInfo = await _blockChainService.ViewContractAsync<TokenInfo>(
             chainId, contractAddress,
             "GetTokenInfo", tokenInfoParam);
