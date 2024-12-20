@@ -29,7 +29,7 @@ public class NFTTransferredProcessorTests : nftIndexerTestBase
         // Arrange
         var testEvent = new TestIssuedEvent
         {
-            To = Address.FromBase58("2hxkDg6Pd2d4yU1A16PTZVMMrEDYEPR8oQojMDwWdax5LsBaxX"),
+            To = Address.FromBase58("ASh2Wt7nSEmYqnGxPPzp4pnVDU4uhj1XW9Se5VeZcX2UDdyjx"),
             Symbol = "SGR-106",
             Amount = 1,
             Memo = "Test NFT"

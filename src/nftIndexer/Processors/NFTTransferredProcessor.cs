@@ -75,7 +75,8 @@ public class NFTTransferredProcessor : LogEventProcessorBase<Issued>, ITransient
                 Amount = amount,
                 Address = address,
                 TokenName = tokenInfo.TokenName,
-                ExternalInfo = tokenInfo.ExternalInfo
+                NftImageUri = tokenInfo.ExternalInfo?.Value["__nft_image_uri"],
+                NftAttributes = tokenInfo.ExternalInfo?.Value["__nft_attributes"]
             };
         }
         else
