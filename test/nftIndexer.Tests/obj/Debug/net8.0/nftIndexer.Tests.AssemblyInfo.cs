@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("nftIndexer.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d6e3cea33ce591c3c2e88e51b2dd946ac43d8ce")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5926498a6990431500a1041e8d4bd9d96cdc4b43")]
 [assembly: System.Reflection.AssemblyProductAttribute("nftIndexer.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("nftIndexer.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
