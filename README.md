@@ -40,13 +40,8 @@ nftIndexer/
 ```bash
 dotnet restore
 dotnet build
-dotnet run --project src/nftIndexer
 ```
 
 ## Configuration
 
 Configure your indexer settings in the appropriate configuration files. Make sure to set up your AEFinder SDK configuration properly.
-
-## License
-
-[Add your license information here] 
